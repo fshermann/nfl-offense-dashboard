@@ -1,0 +1,2 @@
+Data taken from kaggle user KendallGillies
+https://www.kaggle.com/kendallgillies/nflstatistics

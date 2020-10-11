@@ -1,14 +1,14 @@
-from flask import Flask, jsonify
+from flask import Flask, jsonify, render_template
+import os
 
-app = Flask(__name__)
+app = Flask(__name__, template_folder=os.path.abspath('static/templates')) # reference a different path for templates
 
 # home route
-@app.route("/")
+@app.route('/')
 def welcome():
-    """List available api routes."""
-    return (
-        f'Welcome!!!'
-    )
+    '''Home page route.'''
+
+    return render_template('index.html')
 
 # run app
 if __name__ == '__main__':
