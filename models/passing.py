@@ -9,8 +9,8 @@ db = SQLAlchemy()
 class Passing(db.Model):
     __tablename__ = 'passing'
 
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.Integer) 
+    id = db.Column(db.String, primary_key=True)
+    name = db.Column(db.String) 
     games_played = db.Column(db.Integer)
     passing_attempts = db.Column(db.Integer)
     passing_completions = db.Column(db.Integer)
@@ -21,6 +21,15 @@ class Passing(db.Model):
     passing_over_40 = db.Column(db.Integer)
     sacks = db.Column(db.Integer)
     sack_yards = db.Column(db.Integer)
+    birth_place = db.Column(db.String)
+    birth_date = db.Column(db.String)
+    college =db.Column(db.String)
+    experience = db.Column(db.String)
+    height = db.Column(db.String)
+    weight = db.Column(db.String)
+    high_school = db.Column(db.String)
+    high_school_location = db.Column(db.String)
+    years_played =db.Column(db.String)
 
     def __init__(self, data):
 
@@ -54,6 +63,15 @@ class Passing(db.Model):
         self.passing_over_40 = data['passing_over_40']
         self.sacks = data['sacks']
         self.sack_yards = data['sack_yards']
+        self.birth_place = data['birth_place']
+        self.birth_date = data['birth_date']
+        self.college = data['college']
+        self.experience = data['experience']
+        self.height = data['height']
+        self.weight = data['weight']
+        self.high_school = data['high_school']
+        self.high_school_location = data['high_school_location']
+        self.years_played = data['years_played']
 
     def __repr__(self):
         return f'<id {self.id}, name {self.name}>'

@@ -1,7 +1,7 @@
 # flask
 from flask import Flask, jsonify, render_template
 
-# os and sys utilities
+# os
 import os
 
 # initialize app
@@ -16,11 +16,16 @@ engine, session = setup_dependencies(app)
 def welcome():
     '''Home page route.'''
 
-    # passing_obj = Passing(data)
-    # session.add(passing_obj)
-    # session.commit()
-
     return render_template('index.html')
+
+def insert_data():
+
+    '''Runs the data_handler functions to insert data.'''
+
+    import sys
+    sys.path.append("..")
+    import data_handler
+    data_handler.insert_all()
 
 # run app
 if __name__ == '__main__':
