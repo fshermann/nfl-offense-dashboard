@@ -12,8 +12,8 @@ Both datasets used are incomplete.
 ## Frontend Technologies:
 1. HTML | CSS | JavaScript
 2. Bootstrap
-3. Plotly (TODO)
-4. D3 (TODO)
+3. Plotly
+4. D3
 
 ## Data Manipulation and Analysis Technologies:
 1. pandas
@@ -25,4 +25,4 @@ Both datasets used are incomplete.
 Feel free to use any of the code I have written for your own projects!
 
 ## Credits
-Data taken from kaggle user [KendallGillies](https://www.kaggle.com/kendallgillies/nflstatistics).
+Data from kaggle user [KendallGillies](https://www.kaggle.com/kendallgillies/nflstatistics).
