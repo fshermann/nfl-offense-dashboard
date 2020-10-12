@@ -9,14 +9,48 @@ app = Flask(__name__, template_folder=os.path.abspath('static/templates')) # ref
 
 # setup database and sqlalchemy dependencies
 from sql_setup import setup_dependencies
-engine, session = setup_dependencies(app)
+engine, session, Passing, Rushing = setup_dependencies(app)
 
 # home route
 @app.route('/')
 def welcome():
-    '''Home page route.'''
+    '''Main Dashboard Route.'''
 
-    return render_template('index.html')
+    # get top 10 passers
+    passers = session.query(Passing).order_by(Passing.passing_yards.desc())[0:10]
+
+    # get top 10 rushers
+    rushers = session.query(Rushing).order_by(Rushing.rushing_yards.desc())[0:10]
+
+    return render_template('index.html', passers=passers, rushers=rushers)
+
+# passing yards per year data
+@app.route('/passing-yards-tds')
+def passing_yards_tds():
+
+    '''Returns JSON data of passing yards and touchdowns.'''
+
+    # import pandas
+    import pandas as pd
+
+    # group by 
+    passing_yards = pd.read_sql_table('passing', engine)[['name', 'passing_yards', 'passing_tds']]
+
+    return passing_yards.to_json()
+
+# passing yards per year data
+@app.route('/rushing-yards-tds')
+def rushing_yards_tds():
+
+    '''Returns JSON data of passing yards and touchdowns.'''
+
+    # import pandas
+    import pandas as pd
+
+    # group by 
+    rushing_yards = pd.read_sql_table('rushing', engine)[['name', 'rushing_yards', 'rushing_tds']]
+
+    return rushing_yards.to_json()
 
 def insert_data():
 

@@ -43,4 +43,4 @@ def setup_dependencies(app):
         Rushing.__table__.create(bind=engine)
         session.commit()
 
-    return engine, session
+    return engine, session, Passing, Rushing

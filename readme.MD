@@ -1,5 +1,8 @@
 # NFL Passing and Rushing Statistics Dashboard
 
+Data visualization dashboard for NFL passing and rushing data (1970 through 2016 seasons).
+Both datasets used are incomplete.
+
 ## Backend Technologies:
 1. Flask
 2. SQLalchemy
@@ -20,3 +23,6 @@
 
 ## Deployed to Heroku [here](https://hermann-nfl-offense-dashboard.herokuapp.com/)!
 Feel free to use any of the code I have written for your own projects!
+
+## Credits
+Data taken from kaggle user [KendallGillies](https://www.kaggle.com/kendallgillies/nflstatistics).
