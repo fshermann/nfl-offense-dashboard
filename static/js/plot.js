@@ -72,7 +72,7 @@ d3.json('https://hermann-nfl-offense-dashboard.herokuapp.com/passing-yards-tds')
         type: 'scatter'
     }
     var data = [trace]
-    Plotly.newPlot(passing_plot, data, passing_layout)
+    Plotly.newPlot(passing_plot, data, passing_layout, { responsive: true })
 })
 
 d3.json('https://hermann-nfl-offense-dashboard.herokuapp.com/rushing-yards-tds').then((d) => {
@@ -86,6 +86,6 @@ d3.json('https://hermann-nfl-offense-dashboard.herokuapp.com/rushing-yards-tds')
         type: 'scatter'
     }
     var data = [trace]
-    Plotly.newPlot(rushing_plot, data, rushing_layout)
+    Plotly.newPlot(rushing_plot, data, rushing_layout, { responsive: true })
 })
 
