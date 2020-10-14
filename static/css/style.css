@@ -1,0 +1,7 @@
+.img-fluid {
+    border-radius: 50%;
+}
+
+.link-group:hover {
+    background-color: lightblue;
+}
