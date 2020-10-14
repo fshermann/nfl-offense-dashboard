@@ -1,12 +1,13 @@
 # flask
 from flask import Flask, jsonify, render_template
+from flask_cors import CORS
 
 # os
 import os
 
 # initialize app
 app = Flask(__name__, template_folder=os.path.abspath('static/templates')) # reference a different path for templates
-
+CORS(app)
 # setup database and sqlalchemy dependencies
 from sql_setup import setup_dependencies
 engine, session, Passing, Rushing = setup_dependencies(app)
