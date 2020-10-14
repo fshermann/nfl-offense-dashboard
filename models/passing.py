@@ -2,7 +2,6 @@ import sqlalchemy
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.dialects.postgresql import JSON
 import os
-import app
 
 db = SQLAlchemy()
 
