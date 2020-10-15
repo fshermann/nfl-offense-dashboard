@@ -1,5 +1,5 @@
-const ROOT_URL = 'http://localhost:5000'
-//const ROOT_URL = 'https://hermann-nfl-offense-dashboard.herokuapp.com'
+//const ROOT_URL = 'http://localhost:5000'
+const ROOT_URL = 'https://hermann-nfl-offense-dashboard.herokuapp.com'
 
 function makeLayout(xAxis, yAxis) {
 
