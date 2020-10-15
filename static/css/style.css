@@ -5,3 +5,9 @@
 .link-group:hover {
     background-color: lightblue;
 }
+
+.table-responsive {
+    overflow-x:hidden !important;
+    width: 100%;
+    padding: 10px;
+}

@@ -1,9 +1,13 @@
 # flask
 from flask import Flask, jsonify, render_template
 from flask_cors import CORS
+import json
 
 # os
 import os
+
+# import pandas
+import pandas as pd
 
 # initialize app
 app = Flask(__name__, template_folder=os.path.abspath('static/templates')) # reference a different path for templates
@@ -17,41 +21,56 @@ engine, session, Passing, Rushing = setup_dependencies(app)
 def welcome():
     '''Main Dashboard Route.'''
 
-    # get top 10 passers
-    passers = session.query(Passing).order_by(Passing.passing_yards.desc())[0:10]
+    # get default data
+    data = session.query(Passing).order_by(Passing.passing_yards.desc())
 
-    # get top 10 rushers
-    rushers = session.query(Rushing).order_by(Rushing.rushing_yards.desc())[0:10]
+    # default dropdowns
+    options = populate_dropdown('passing')
+    options = options.json
+    options = [x.capitalize().replace('_', ' ') for x in options]
 
-    return render_template('index.html', passers=passers, rushers=rushers)
+    return render_template('index.html', data=data, options=options)
 
-# passing yards per year data
-@app.route('/passing-yards-tds')
-def passing_yards_tds():
+# data return route
+@app.route('/<table>/<x>/<y>')
+def get_data(table, x, y):
 
-    '''Returns JSON data of passing yards and touchdowns.'''
-
-    # import pandas
-    import pandas as pd
-
-    # group by 
-    passing_yards = pd.read_sql_table('passing', engine)[['name', 'passing_yards', 'passing_tds']]
-
-    return passing_yards.to_json()
-
-# passing yards per year data
-@app.route('/rushing-yards-tds')
-def rushing_yards_tds():
-
-    '''Returns JSON data of passing yards and touchdowns.'''
-
-    # import pandas
-    import pandas as pd
+    '''Returns JSON data from user choices.'''
 
     # group by 
-    rushing_yards = pd.read_sql_table('rushing', engine)[['name', 'rushing_yards', 'rushing_tds']]
+    data = pd.read_sql_table(table, engine)[['name', x, y]]
 
-    return rushing_yards.to_json()
+    return data.to_json()
+
+@app.route('/<table>')
+def populate_dropdown(table):
+
+    '''Returns the columns a user can choose from.'''
+
+    exclusions = ['id', 'name', 'birth_place', 'birth_date', 'college', 'experience', 'high_school', 'high_school_location', 'years_played']
+
+    options = [x for x in pd.read_sql_table(table, engine).columns if x not in exclusions]
+
+    return jsonify(options)
+
+@app.route('/table/<table>/<x>/<y>')
+def get_table_data(table, x, y):
+
+    '''Returns JSON data from user choices made for bootstrap table.'''
+
+    # group by 
+    data = pd.read_sql_table(table, engine)[['name', x, y]]
+
+    table_data = []
+    for ind, row in data.iterrows():
+        d = {
+            'name': row['name'],
+            'x': row[x],
+            'y': row[y]
+        }
+        table_data.append(d)
+
+    return jsonify(table_data)
 
 def insert_data():
 
