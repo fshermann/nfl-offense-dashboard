@@ -102,6 +102,12 @@ function createTable(d, x, y) {
 function createScatter(table, x, y) {
     d3.json(`${ROOT_URL}/${toSnakeCase(table)}/${toSnakeCase(x)}/${toSnakeCase(y)}`).then((d) =>{
 
+        // check for incorrect input
+        if(d.length === 0){
+            alert('Please choose different x and y values!')
+            return
+        }
+
         // update table
         createTable(d, x, y)
 

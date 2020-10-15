@@ -37,6 +37,9 @@ def get_data(table, x, y):
 
     '''Returns JSON data from user choices.'''
 
+    # handle x and y inputs being identical
+    if(x == y):
+        return jsonify([])
     # group by 
     data = pd.read_sql_table(table, engine)[['name', x, y]]
 
