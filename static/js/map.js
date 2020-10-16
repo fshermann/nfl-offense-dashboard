@@ -1,5 +1,5 @@
-const ROOT_URL = 'http://localhost:5000'
-// const ROOT_URL = 'https://hermann-nfl-offense-dashboard.herokuapp.com'
+// const ROOT_URL = 'http://localhost:5000'
+const ROOT_URL = 'https://hermann-nfl-offense-dashboard.herokuapp.com'
 
 // map
 var map = L.map('map').setView([37.8, -96], 4)
