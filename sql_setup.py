@@ -31,7 +31,7 @@ def setup_dependencies(app):
     session = Session()
 
     # import data handlers
-    sys.path.insert(1, 'data_handlers')
+    sys.path.insert(1, 'data_insert')
 
     # create tables
     if not engine.dialect.has_table(engine, 'passing'):

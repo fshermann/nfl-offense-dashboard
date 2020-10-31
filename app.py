@@ -124,12 +124,12 @@ def get_table_data(table, x, y):
 
 def insert_data():
 
-    '''Runs the data_handler functions to insert data.'''
+    '''Runs the data_insert functions to insert csv files into cloud database.'''
 
     import sys
     sys.path.append("..")
-    import data_handler
-    data_handler.insert_all()
+    import data_insert
+    data_insert.insert_all()
 
 # run app
 if __name__ == '__main__':

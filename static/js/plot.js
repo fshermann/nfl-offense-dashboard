@@ -1,4 +1,3 @@
-//const ROOT_URL = 'http://localhost:5000'
 const ROOT_URL = 'https://hermann-nfl-offense-dashboard.herokuapp.com'
 
 function makeLayout(xAxis, yAxis) {
@@ -99,13 +98,18 @@ function createTable(d, x, y) {
 
 }
 
-function createScatter(table, x, y) {
+function createScatter(table, x, y, zeros) {
     d3.json(`${ROOT_URL}/${toSnakeCase(table)}/${toSnakeCase(x)}/${toSnakeCase(y)}`).then((d) =>{
 
         // check for incorrect input
         if(d.length === 0){
             alert('Please choose different x and y values!')
             return
+        }
+
+        // remove zero values
+        if (zeros) {
+            d = removeZeros(d, toSnakeCase(x), toSnakeCase(y))
         }
 
         // update table
@@ -140,14 +144,18 @@ function updateScatter() {
 
     // get x choice
     var xAxis = document.getElementById('x-selector-dropdown')
-    var xAxis = xAxis.options[xAxis.selectedIndex].value.toLowerCase()
+    xAxis = xAxis.options[xAxis.selectedIndex].value.toLowerCase()
 
     // get y choice
     var yAxis = document.getElementById('y-selector-dropdown')
-    var yAxis = yAxis.options[yAxis.selectedIndex].value.toLowerCase()
+    yAxis = yAxis.options[yAxis.selectedIndex].value.toLowerCase()
+
+    // get remove zero option
+    var removeZeros = document.getElementById('remove-zeros')
+    removeZeros = removeZeros.checked
 
     //create scatter plot
-    createScatter(table, xAxis, yAxis)
+    createScatter(table, xAxis, yAxis, removeZeros)
 }
 
 function updateSelectors() {
@@ -214,6 +222,30 @@ function toSnakeCase(str) {
 
 }
 
+function removeZeros(obj, x, y) {
+
+    /* Removes entries that have 0s in x or y values. */
+
+    var clean = {}
+
+    // setup arrays
+    clean[x] = []
+    clean[y] = []
+    clean['name'] = []
+
+    // loop through object
+    for (var i = 0; i < Object.keys(obj[x]).length; i++) {
+        // if the values are not empty, add to the new object
+        if (obj[x][i] != 0 && obj[y][i] != 0) {
+            clean[x].push(obj[x][i])
+            clean[y].push(obj[y][i])
+            clean['name'].push(obj['name'][i])
+        }
+    }
+
+    return clean
+
+}
 
 $(document).ready(() => {
 
